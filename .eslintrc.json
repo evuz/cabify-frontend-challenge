@@ -1,10 +1,12 @@
 {
-  "extends": "react-app",
+  "extends": ["react-app", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "indent": ["error", 2],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-var": "error",
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "prettier/prettier": "error"
   }
 }
