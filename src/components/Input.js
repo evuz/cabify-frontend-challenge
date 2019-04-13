@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import filterClassnames from '../utils/filterClassnames';
+
 function Input({ name, label, placeholder, value, onChange, disabled, type }) {
   const [focus, setFocus] = useState(false);
-  const classNames = {
+  const containerClass = {
     focus,
     disabled,
     'formField-input': true,
     active: !!value | focus,
   };
-  const renderClass = Object.keys(classNames)
-    .filter(key => classNames[key])
-    .join(' ');
+
   return (
-    <div className={renderClass}>
+    <div className={filterClassnames(containerClass)}>
       <div className="input">
         <input
           type={type}
