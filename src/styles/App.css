@@ -438,16 +438,15 @@ input:-webkit-autofill {
   line-height: 24px;
   cursor: pointer;
   transition: all 0.5s linear; }
-  .button.disabled {
-    opacity: 0.32;
-    pointer-events: none; }
+  .button:disabled {
+    opacity: 0.32; }
   .button-primary {
     background-color: #7350FF;
     color: #FFFFFF; }
-    .button-primary:active {
-      background-color: #6645FF; }
     .button-primary:hover {
       background-color: #7F5AFF; }
+    .button-primary:active {
+      background-color: #6645FF; }
   .button-full {
     display: block;
     width: 100%; }

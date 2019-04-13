@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Input from './components/Input';
+import Button from './components/Button';
 
 import useInput from './hooks/useInput';
 
@@ -110,11 +111,14 @@ function App() {
             </div>
           </div>
           <div className="row row-separationHuge">
-            <input
+            <Button type="submit" disabled full>
+              Request
+            </Button>
+            {/* <input
               className="button button-full button-primary disabled"
               type="submit"
               value="Request"
-            />
+            /> */}
           </div>
         </form>
       </article>
