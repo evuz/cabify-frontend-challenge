@@ -34,20 +34,16 @@ function Input({ name, label, placeholder, value, onChange, disabled, type }) {
 Input.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  // USE ONE OF
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['text', 'email', 'tel', 'password']),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
 };
 
 Input.defaultProps = {
   placeholder: null,
   disabled: false,
-  value: undefined,
   type: 'text',
-  onChange: function() {},
 };
 
 export default Input;
