@@ -80,18 +80,19 @@
 
     &-bottom {
       padding-right: $spacing*3;
+      font-size: $font-size-xs;
     }
 
     &-title {
       color: $color-print-main;
-      font-size: $font-size-m;
+      font-size: $font-size-l;
       line-height: 24px;
     }
-    
+
     &-subtitle {
       color: $color-base;
       line-height: 16px;
-      font-size: $font-size-xs;
+      font-size: $font-size-m;
     }
   }
 
@@ -101,8 +102,8 @@
         content: "";
         display: inline-block;
         margin-right: $spacing;
-        width: $spacing;
-        height: $spacing;
+        width: $font-size-xs;
+        height: $font-size-xs;
         vertical-align: middle;
         margin-top: -2px;
       }

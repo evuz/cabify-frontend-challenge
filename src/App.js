@@ -1,96 +1,116 @@
-import React, { Component } from 'react';
-import cabifyLogo from './images/cabify-logo.svg';
+import React from 'react';
+
+import Input from './components/Input';
+import Button from './components/Button';
+import BusinessCard from './components/BusinessCard';
+
+import useInput from './hooks/useInput';
+
 import './styles/App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="mainWrapper row">
-        <article className="businessCard col col6">
-          <figure className="businessCard-badge">
-            <a className="businessCard-badge-logo" href="http://www.cabify.com">
-              <img src={cabifyLogo} alt="Cabify" />
-            </a>
-          </figure>
-          <h1 className="title-main">Request your business card</h1>
-          <div className="businessCard-cards">
-            <div className="businessCard-cardBack" />
-            <div className="businessCard-cardFront">
-              <div>
-                <p className="businessCard-cardFront-title">Laura Sánchez</p>
-                <p className="businessCard-cardFront-subtitle">Fronte</p>
-              </div>
-              <div className="businessCard-cardFront-bottom">
-                <p className="businessCard-icon-phone">+34 </p>
-                <p className="businessCard-icon-email"></p>
-                <p className="businessCard-icon-website">www.cabify.com</p>
-                <p className="businessCard-icon-address">Calle Pradillo 42. CP: 28002. Madrid</p>
-              </div>
+function App() {
+  const [fullname, setFullname] = useInput();
+  const [jobdescription, setJobdescription] = useInput();
+  const [phonenumber, setPhonenumber] = useInput();
+  const [email, setEmail] = useInput();
+  const [website, setWebsite] = useInput();
+  const [address, setAddress] = useInput();
+
+  return (
+    <div className="mainWrapper row">
+      <article className="col col6">
+        <BusinessCard
+          userInfo={{
+            fullname,
+            jobdescription,
+            phonenumber,
+            email,
+            website,
+            address,
+          }}
+        />
+      </article>
+      <article className="builder col col6">
+        <form className="form" action="">
+          <div className="row">
+            <div className="col col12">
+              <Input
+                label="Full name"
+                name="fullname"
+                value={fullname}
+                onChange={setFullname}
+              />
             </div>
           </div>
-        </article>
-        <article className="builder col col6">
-          <form className="form" action="">
-            <div className="row">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="fullname" value="Laura Sánchez" />
-                  <label htmlFor="fullname">Full name</label>
-                </div>
-              </div>
+          <div className="row row-separationMedium">
+            <div className="active focus col col12">
+              <Input
+                label="Job description"
+                name="jobdescription"
+                value={jobdescription}
+                onChange={setJobdescription}
+              />
             </div>
-            <div className="row row-separationMedium">
-              {/* you probably need to add active/focus/disabled classNames */}
-              <div className="formField-input active focus col col12">
-                <div className="input">
-                  <input type="text" name="jobdescription" value="Fronte" />
-                  <label htmlFor="jobdescription">Job description</label>
-                </div>
-              </div>
+          </div>
+          <div className="row row-separationMedium row-gutterMedium">
+            <div className="col col3">
+              {/* select field will be placed here */}
             </div>
-            <div className="row row-separationMedium row-gutterMedium">
-              <div className="col col3">
-                {/* select field will be placed here */}
-              </div>
-              <div className="formField-input col col9">
-                <div className="input">
-                  <input type="tel" name="ponenumber" />
-                  <label htmlFor="ponenumber">Phone number</label>
-                </div>
-              </div>
+            <div className="col col9">
+              <Input
+                label="Phone number"
+                name="phonenumber"
+                type="tel"
+                value={phonenumber}
+                onChange={setPhonenumber}
+              />
             </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input col col12">
-                <div className="input">
-                  <input type="email" name="email" />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
+          </div>
+          <div className="row row-separationMedium">
+            <div className="col col12">
+              <Input
+                label="Email"
+                name="email"
+                type="email"
+                value={email}
+                onChange={setEmail}
+              />
             </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input active disabled col col12">
-                <div className="input">
-                  <input type="text" name="website" value="www.cabify.com" />
-                  <label htmlFor="website">Website</label>
-                </div>
-              </div>
+          </div>
+          <div className="row row-separationMedium">
+            <div className="active disabled col col12">
+              <Input
+                label="Website"
+                name="website"
+                value={website}
+                onChange={setWebsite}
+              />
             </div>
-            <div className="row row-separationMedium">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="address" value="Calle Pradillo 42. CP: 28002. Madrid" />
-                  <label htmlFor="address">Address</label>
-                </div>
-              </div>
+          </div>
+          <div className="row row-separationMedium">
+            <div className="col col12">
+              <Input
+                label="Address"
+                name="address"
+                value={address}
+                onChange={setAddress}
+              />
             </div>
-            <div className="row row-separationHuge">
-              <input className="button button-full button-primary disabled" type="submit" value="Request" />
-            </div>
-          </form>
-        </article>
-      </div>
-    );
-  }
+          </div>
+          <div className="row row-separationHuge">
+            <Button type="submit" disabled full>
+              Request
+            </Button>
+            {/* <input
+              className="button button-full button-primary disabled"
+              type="submit"
+              value="Request"
+            /> */}
+          </div>
+        </form>
+      </article>
+    </div>
+  );
 }
 
 export default App;
