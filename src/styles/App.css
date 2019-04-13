@@ -341,21 +341,22 @@ a {
       background: url("../images/cabify-logo-min.svg") center center no-repeat;
       background-size: contain; }
     .businessCard-cardFront-bottom {
-      padding-right: 24px; }
+      padding-right: 24px;
+      font-size: 11px; }
     .businessCard-cardFront-title {
       color: #4C58A7;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 24px; }
     .businessCard-cardFront-subtitle {
       color: #212240;
       line-height: 16px;
-      font-size: 11px; }
+      font-size: 13px; }
   .businessCard-icon-phone:before, .businessCard-icon-email:before, .businessCard-icon-website:before, .businessCard-icon-address:before {
     content: "";
     display: inline-block;
     margin-right: 8px;
-    width: 8px;
-    height: 8px;
+    width: 11px;
+    height: 11px;
     vertical-align: middle;
     margin-top: -2px; }
   .businessCard-icon-phone:before {

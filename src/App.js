@@ -2,10 +2,10 @@ import React from 'react';
 
 import Input from './components/Input';
 import Button from './components/Button';
+import BusinessCard from './components/BusinessCard';
 
 import useInput from './hooks/useInput';
 
-import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
 
 function App() {
@@ -18,30 +18,17 @@ function App() {
 
   return (
     <div className="mainWrapper row">
-      <article className="businessCard col col6">
-        <figure className="businessCard-badge">
-          <a className="businessCard-badge-logo" href="http://www.cabify.com">
-            <img src={cabifyLogo} alt="Cabify" />
-          </a>
-        </figure>
-        <h1 className="title-main">Request your business card</h1>
-        <div className="businessCard-cards">
-          <div className="businessCard-cardBack" />
-          <div className="businessCard-cardFront">
-            <div>
-              <p className="businessCard-cardFront-title">{fullname}</p>
-              <p className="businessCard-cardFront-subtitle">
-                {jobdescription}
-              </p>
-            </div>
-            <div className="businessCard-cardFront-bottom">
-              <p className="businessCard-icon-phone">{phonenumber}</p>
-              <p className="businessCard-icon-email">{email}</p>
-              <p className="businessCard-icon-website">{website}</p>
-              <p className="businessCard-icon-address">{address}</p>
-            </div>
-          </div>
-        </div>
+      <article className="col col6">
+        <BusinessCard
+          userInfo={{
+            fullname,
+            jobdescription,
+            phonenumber,
+            email,
+            website,
+            address,
+          }}
+        />
       </article>
       <article className="builder col col6">
         <form className="form" action="">
