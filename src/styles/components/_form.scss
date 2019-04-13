@@ -13,55 +13,91 @@ input:-webkit-autofill {
 }
 
 .formField {
-  &-input {
+  &-input,
+  &-select {
     display: flex;
     border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
     &.active {
-      .input label {
-        top: 0;
+      .input,
+      .select {
+        label {
+          top: 0;
+        }
       }
     }
-    
+
     &.focus {
       border-color: $color-focus;
-      
+
       .input input {
         color: $color-main;
       }
+
+      .select {
+        &:after {
+          transform: rotate(-180deg);
+        }
+      }
     }
-    
+
     &.disabled {
       border-bottom: dotted 1px $color-positive-lighter;
-      .input input {
+      .input input,
+      .select .select-value {
         color: $color-positive-lighter;
         cursor: not-allowed;
       }
     }
-    
-    .input {
+
+    .input,
+    .select {
       flex: 1 1 100%;
       position: relative;
-      
+
       label {
         color: $color-positive-light;
         font-size: $font-size-xs;
         line-height: 16px;
         pointer-events: none;
         position: absolute;
-        top: $spacing*2;
+        top: $spacing * 2;
         right: 0;
         left: 0;
         transition: all $fastest ease;
       }
-      
-      input {
+
+      input,
+      .select-value {
         background-color: transparent;
-        padding: $spacing*2 0 $spacing;
+        padding: $spacing * 2 0 $spacing;
         width: 100%;
         font-size: $font-size-s;
         line-height: 16px;
       }
+
+      .select-value {
+        min-height: 40px;
+      }
     }
+
+    .select {
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        background: url("../images/arrow.svg") center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition: transform $fastest ease-in;
+      }
+    }
+  }
+
+  &-select {
+    cursor: pointer;
   }
 }

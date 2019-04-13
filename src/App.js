@@ -7,6 +7,7 @@ import BusinessCard from './components/BusinessCard';
 import useInput from './hooks/useInput';
 
 import './styles/App.css';
+import Select from './components/Select';
 
 function App() {
   const [fullname, setFullname] = useInput();
@@ -54,7 +55,7 @@ function App() {
           </div>
           <div className="row row-separationMedium row-gutterMedium">
             <div className="col col3">
-              {/* select field will be placed here */}
+              <Select label="Prefix" name="prefix" />
             </div>
             <div className="col col9">
               <Input
