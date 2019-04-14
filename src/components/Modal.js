@@ -11,9 +11,13 @@ function Backdrop({ onClick, show }) {
   return <div className={filterClassnames(classnames)} onClick={onClick} />;
 }
 
-function Modal({ onClose, showBackdrop, children }) {
+function Modal({ onClose, showBackdrop, children, className }) {
+  const classnames = {
+    modal: true,
+    [className]: !!className,
+  };
   return ReactDOM.createPortal(
-    <div className="modal">
+    <div className={filterClassnames(classnames)}>
       <Backdrop onClick={onClose} show={showBackdrop} />
       <div className="modal-content">{children}</div>
     </div>,
@@ -24,11 +28,13 @@ function Modal({ onClose, showBackdrop, children }) {
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
   showBackdrop: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   showBackdrop: false,
+  className: null,
 };
 
 export default Modal;
