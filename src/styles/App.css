@@ -474,7 +474,7 @@ input:-webkit-autofill {
     animation: scale-in 0.3s;
     overflow: hidden;
     max-height: 180px;
-    max-width: 170px;
+    max-width: 240px;
     border-radius: 3px;
     box-shadow: 0px 0px 8px rgba(33, 34, 64, 0.16);
     background-color: white; }
@@ -555,6 +555,28 @@ input:-webkit-autofill {
       opacity: 0.3; }
   .modal-content {
     position: absolute; }
+
+.country-code-option {
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 220px;
+  min-height: inherit;
+  padding: 0 12px;
+  color: #717285; }
+  .country-code-option-left {
+    display: flex;
+    align-items: center; }
+  .country-code-option-flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 15px; }
 
 .title-main {
   font-size: 36px;

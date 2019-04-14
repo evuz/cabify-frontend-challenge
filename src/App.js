@@ -3,11 +3,15 @@ import React from 'react';
 import Input from './components/Input';
 import Button from './components/Button';
 import BusinessCard from './components/BusinessCard';
+import Select from './components/Select';
+import Option from './components/Option';
 
 import useInput from './hooks/useInput';
 
+import cabifyCountries from './utils/cabifyCountries';
+
 import './styles/App.css';
-import Select from './components/Select';
+import CountryCodeOption from './components/CountryCodeOption';
 
 function App() {
   const [fullname, setFullname] = useInput();
@@ -55,7 +59,13 @@ function App() {
           </div>
           <div className="row row-separationMedium row-gutterMedium">
             <div className="col col3">
-              <Select label="Prefix" name="prefix" />
+              <Select label="Prefix" name="prefix">
+                {cabifyCountries.map(country => (
+                  <Option key={country.callingCode}>
+                    <CountryCodeOption country={country} />
+                  </Option>
+                ))}
+              </Select>
             </div>
             <div className="col col9">
               <Input
