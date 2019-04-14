@@ -442,18 +442,24 @@ input:-webkit-autofill {
     .formField-input .input .select-value,
     .formField-input .select .select-value, .formField-select .input .select-value,
     .formField-select .select .select-value {
-      min-height: 40px; }
-  .formField-input .select:after, .formField-select .select:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 8px;
-    height: 8px;
-    background: url("../images/arrow.svg") center center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    transition: transform 0.3s ease-in; }
+      min-height: 40px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  .formField-input .select, .formField-select .select {
+    max-width: 100%;
+    padding-right: 15px; }
+    .formField-input .select:after, .formField-select .select:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background: url("../images/arrow.svg") center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: transform 0.3s ease-in; }
 
 .formField-select {
   cursor: pointer; }
@@ -485,6 +491,26 @@ input:-webkit-autofill {
   .button-full {
     display: block;
     width: 100%; }
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh; }
+    .modal-backdrop.show {
+      background-color: black;
+      opacity: 0.3; }
+  .modal-content {
+    position: absolute; }
 
 .title-main {
   font-size: 36px;
