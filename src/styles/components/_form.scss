@@ -94,7 +94,7 @@ input:-webkit-autofill {
         right: 0;
         width: 8px;
         height: 8px;
-        background: url("../images/arrow.svg") center center;
+        background: url('../images/arrow.svg') center center;
         background-repeat: no-repeat;
         background-size: contain;
         transition: transform $fastest ease-in;
@@ -104,5 +104,59 @@ input:-webkit-autofill {
 
   &-select {
     cursor: pointer;
+
+    .select-options {
+      transform-origin: top;
+      animation: scale-in $fastest;
+      overflow: hidden;
+      max-height: 180px;
+      max-width: 170px;
+      border-radius: 3px;
+      box-shadow: 0px 0px 8px $color-shadow-light;
+      background-color: white;
+
+      .options-content {
+        position: relative;
+        width: calc(100% + 17px);
+        overflow: auto;
+        max-height: inherit;
+        padding: 5px 8px;
+      }
+      &:after {
+        bottom: 0;
+        background: linear-gradient(transparent, white);
+      }
+
+      &:before {
+        top: 0;
+        background: linear-gradient(white, transparent);
+      }
+
+      &:after,
+      &:before {
+        content: '';
+        z-index: 1000;
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 12px;
+      }
+    }
+
+    .select-option {
+      width: 100%;
+      min-height: 36px;
+      margin: 2px 0;
+      border-radius: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      &:hover,
+      &:focus {
+        // background-color: $color-selago;
+        background-color: lightgray;
+      }
+    }
   }
 }

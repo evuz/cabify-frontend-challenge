@@ -59,6 +59,12 @@ input[type=number] {
 textarea {
   vertical-align: top; }
 
+@keyframes scale-in {
+  from {
+    transform: scaleY(0); }
+  to {
+    transform: scaleY(1); } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -463,6 +469,44 @@ input:-webkit-autofill {
 
 .formField-select {
   cursor: pointer; }
+  .formField-select .select-options {
+    transform-origin: top;
+    animation: scale-in 0.3s;
+    overflow: hidden;
+    max-height: 180px;
+    max-width: 170px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px rgba(33, 34, 64, 0.16);
+    background-color: white; }
+    .formField-select .select-options .options-content {
+      position: relative;
+      width: calc(100% + 17px);
+      overflow: auto;
+      max-height: inherit;
+      padding: 5px 8px; }
+    .formField-select .select-options:after {
+      bottom: 0;
+      background: linear-gradient(transparent, white); }
+    .formField-select .select-options:before {
+      top: 0;
+      background: linear-gradient(white, transparent); }
+    .formField-select .select-options:after, .formField-select .select-options:before {
+      content: '';
+      z-index: 1000;
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 12px; }
+  .formField-select .select-option {
+    width: 100%;
+    min-height: 36px;
+    margin: 2px 0;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; }
+    .formField-select .select-option:hover, .formField-select .select-option:focus {
+      background-color: lightgray; }
 
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }
