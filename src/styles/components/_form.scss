@@ -78,10 +78,15 @@ input:-webkit-autofill {
 
       .select-value {
         min-height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
     .select {
+      max-width: 100%;
+      padding-right: 15px;
       &:after {
         content: '';
         position: absolute;
