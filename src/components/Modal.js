@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import filterClassnames from '../utils/filterClassnames';
@@ -16,6 +16,25 @@ function Modal({ onClose, showBackdrop, children, className }) {
     modal: true,
     [className]: !!className,
   };
+
+  useEffect(() => {
+    // TODO: get root dynamically
+    let appRoot = document.getElementById('root');
+    const hasScroll =
+      document.documentElement.clientHeight <
+      document.documentElement.scrollHeight;
+
+    document.body.style.overflow = 'hidden';
+    if (hasScroll) {
+      appRoot.style.overflow = 'scroll';
+    }
+
+    return function() {
+      document.body.style.overflow = null;
+      appRoot.style.overflow = null;
+    };
+  });
+
   return ReactDOM.createPortal(
     <div className={filterClassnames(classnames)}>
       <Backdrop onClick={onClose} show={showBackdrop} />

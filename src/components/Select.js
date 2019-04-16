@@ -3,16 +3,38 @@ import PropTypes from 'prop-types';
 
 import filterClassnames from '../utils/filterClassnames';
 import Modal from './Modal';
+import Option from './Option';
 
-function Options({ children }) {
+function Options({ children, onChange, selected }) {
+  const emptyOption = (
+    <Option key="empty" value="">
+      Empty
+    </Option>
+  );
+
+  const options = [emptyOption, ...children].map(el => {
+    function select(...args) {
+      if (typeof el.props.onClick === 'function') {
+        el.props.onClick(...args);
+      }
+      onChange(...args);
+    }
+    return React.cloneElement(el, {
+      onClick: select,
+      selected: el.props.value === selected,
+    });
+  });
+
   return (
     <div className="select-options">
-      <div className="options-content">{children}</div>
+      <div className="options-content" role="listbox">
+        {options}
+      </div>
     </div>
   );
 }
 
-function Select({ children, name, label, value, disabled }) {
+function Select({ children, name, label, value, disabled, onChange }) {
   const cmpRef = useRef(null);
   const [focus, setFocus] = useState(false);
   disabled = disabled || !children;
@@ -45,7 +67,15 @@ function Select({ children, name, label, value, disabled }) {
               left: `${cmpRef.current.offsetLeft}px`,
             }}
           >
-            <Options>{children}</Options>
+            <Options
+              selected={value}
+              onChange={(...args) => {
+                setFocus(false);
+                onChange(...args);
+              }}
+            >
+              {children}
+            </Options>
           </div>
         </Modal>
       ) : null}
@@ -55,6 +85,8 @@ function Select({ children, name, label, value, disabled }) {
 
 Select.propTypes = {
   children: PropTypes.node,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
@@ -63,6 +95,8 @@ Select.propTypes = {
 Select.defaultProps = {
   disabled: false,
   children: null,
+  onChange: function() {},
+  value: '',
 };
 
 export default Select;

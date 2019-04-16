@@ -1,12 +1,8 @@
 .country-code-option {
   display: flex;
-  font-size: $font-size-l;
   justify-content: space-between;
   align-items: center;
-  min-width: 220px;
-  min-height: inherit;
-  padding: 0 12px;
-  color: $color-positive-light;
+  min-width: 200px;
 
   &-left {
     display: flex;

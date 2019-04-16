@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Input from './components/Input';
 import Button from './components/Button';
@@ -20,6 +20,7 @@ function App() {
   const [email, setEmail] = useInput();
   const [website, setWebsite] = useInput();
   const [address, setAddress] = useInput();
+  const [prefix, setPrefix] = useState();
 
   return (
     <div className="mainWrapper row">
@@ -28,6 +29,7 @@ function App() {
           userInfo={{
             fullname,
             jobdescription,
+            prefix,
             phonenumber,
             email,
             website,
@@ -59,9 +61,17 @@ function App() {
           </div>
           <div className="row row-separationMedium row-gutterMedium">
             <div className="col col3">
-              <Select label="Prefix" name="prefix">
+              <Select
+                value={prefix}
+                onChange={setPrefix}
+                label="Prefix"
+                name="prefix"
+              >
                 {cabifyCountries.map(country => (
-                  <Option key={country.callingCode}>
+                  <Option
+                    value={`+${country.callingCode}`}
+                    key={country.callingCode}
+                  >
                     <CountryCodeOption country={country} />
                   </Option>
                 ))}

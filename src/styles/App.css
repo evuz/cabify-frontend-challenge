@@ -498,15 +498,22 @@ input:-webkit-autofill {
       right: 0;
       height: 12px; }
   .formField-select .select-option {
+    display: flex;
+    align-items: center;
     width: 100%;
     min-height: 36px;
     margin: 2px 0;
     border-radius: 4px;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden; }
+    overflow: hidden;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #717285; }
     .formField-select .select-option:hover, .formField-select .select-option:focus {
-      background-color: lightgray; }
+      background-color: #F8FAFB; }
+    .formField-select .select-option.selected {
+      color: black; }
 
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }
@@ -558,13 +565,9 @@ input:-webkit-autofill {
 
 .country-code-option {
   display: flex;
-  font-size: 14px;
   justify-content: space-between;
   align-items: center;
-  min-width: 220px;
-  min-height: inherit;
-  padding: 0 12px;
-  color: #717285; }
+  min-width: 200px; }
   .country-code-option-left {
     display: flex;
     align-items: center; }
