@@ -9,31 +9,44 @@ import Option from './components/Option';
 import useInput from './hooks/useInput';
 
 import cabifyCountries from './utils/cabifyCountries';
+import validators from './utils/validators';
 
 import './styles/App.css';
 import CountryCodeOption from './components/CountryCodeOption';
 
 function App() {
-  const [fullname, setFullname] = useInput();
-  const [jobdescription, setJobdescription] = useInput();
-  const [phonenumber, setPhonenumber] = useInput();
-  const [email, setEmail] = useInput();
-  const [website, setWebsite] = useInput();
-  const [address, setAddress] = useInput();
+  const fullname = useInput('', [validators.required]);
+  const jobdescription = useInput('', [validators.required]);
+  const phonenumber = useInput('', [
+    validators.required,
+    validators.phoneNumber,
+  ]);
+  const email = useInput('', [validators.required, validators.email]);
+  const website = useInput('', [validators.required]);
+  const address = useInput('', [validators.required]);
   const [prefix, setPrefix] = useState();
+
+  const validForm = ![
+    fullname.validation.isValid,
+    jobdescription.validation.isValid,
+    phonenumber.validation.isValid,
+    email.validation.isValid,
+    website.validation.isValid,
+    address.validation.isValid,
+  ].filter(v => !Boolean(v)).length;
 
   return (
     <div className="mainWrapper row">
       <article className="col col6">
         <BusinessCard
           userInfo={{
-            fullname,
-            jobdescription,
             prefix,
-            phonenumber,
-            email,
-            website,
-            address,
+            fullname: fullname.value,
+            jobdescription: jobdescription.value,
+            phonenumber: phonenumber.value,
+            email: email.value,
+            website: website.value,
+            address: address.value,
           }}
         />
       </article>
@@ -41,12 +54,7 @@ function App() {
         <form className="form" action="">
           <div className="row">
             <div className="col col12">
-              <Input
-                label="Full name"
-                name="fullname"
-                value={fullname}
-                onChange={setFullname}
-              />
+              <Input label="Full name" name="fullname" {...fullname} />
             </div>
           </div>
           <div className="row row-separationMedium">
@@ -54,8 +62,7 @@ function App() {
               <Input
                 label="Job description"
                 name="jobdescription"
-                value={jobdescription}
-                onChange={setJobdescription}
+                {...jobdescription}
               />
             </div>
           </div>
@@ -82,51 +89,29 @@ function App() {
                 label="Phone number"
                 name="phonenumber"
                 type="tel"
-                value={phonenumber}
-                onChange={setPhonenumber}
+                {...phonenumber}
               />
             </div>
           </div>
           <div className="row row-separationMedium">
             <div className="col col12">
-              <Input
-                label="Email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={setEmail}
-              />
+              <Input label="Email" name="email" type="email" {...email} />
             </div>
           </div>
           <div className="row row-separationMedium">
             <div className="active disabled col col12">
-              <Input
-                label="Website"
-                name="website"
-                value={website}
-                onChange={setWebsite}
-              />
+              <Input label="Website" name="website" {...website} />
             </div>
           </div>
           <div className="row row-separationMedium">
             <div className="col col12">
-              <Input
-                label="Address"
-                name="address"
-                value={address}
-                onChange={setAddress}
-              />
+              <Input label="Address" name="address" {...address} />
             </div>
           </div>
           <div className="row row-separationHuge">
-            <Button type="submit" disabled full>
+            <Button type="submit" disabled={!validForm} full>
               Request
             </Button>
-            {/* <input
-              className="button button-full button-primary disabled"
-              type="submit"
-              value="Request"
-            /> */}
           </div>
         </form>
       </article>
