@@ -13,54 +13,157 @@ input:-webkit-autofill {
 }
 
 .formField {
-  &-input {
+  &-input,
+  &-select {
     display: flex;
     border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
     &.active {
-      .input label {
-        top: 0;
+      .input,
+      .select {
+        label {
+          top: 0;
+        }
       }
     }
-    
+
     &.focus {
       border-color: $color-focus;
-      
+
       .input input {
         color: $color-main;
       }
+
+      .select {
+        &:after {
+          transform: rotate(-180deg);
+        }
+      }
     }
-    
+
     &.disabled {
       border-bottom: dotted 1px $color-positive-lighter;
-      .input input {
+      .input input,
+      .select .select-value {
         color: $color-positive-lighter;
         cursor: not-allowed;
       }
     }
-    
-    .input {
+
+    .input,
+    .select {
       flex: 1 1 100%;
       position: relative;
-      
+
       label {
         color: $color-positive-light;
         font-size: $font-size-xs;
         line-height: 16px;
         pointer-events: none;
         position: absolute;
-        top: $spacing*2;
+        top: $spacing * 2;
         right: 0;
         left: 0;
         transition: all $fastest ease;
       }
-      
-      input {
+
+      input,
+      .select-value {
         background-color: transparent;
-        padding: $spacing*2 0 $spacing;
+        padding: $spacing * 2 0 $spacing;
         width: 100%;
         font-size: $font-size-s;
         line-height: 16px;
+      }
+
+      .select-value {
+        min-height: 40px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .select {
+      max-width: 100%;
+      padding-right: 15px;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 8px;
+        height: 8px;
+        background: url('../images/arrow.svg') center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition: transform $fastest ease-in;
+      }
+    }
+  }
+
+  &-select {
+    cursor: pointer;
+
+    .select-options {
+      transform-origin: top;
+      animation: scale-in $fastest;
+      overflow: hidden;
+      max-height: 180px;
+      max-width: 240px;
+      border-radius: 3px;
+      box-shadow: 0px 0px 8px $color-shadow-light;
+      background-color: white;
+
+      .options-content {
+        position: relative;
+        width: calc(100% + 17px);
+        overflow: auto;
+        max-height: inherit;
+        padding: 5px 8px;
+      }
+      &:after {
+        bottom: 0;
+        background: linear-gradient(transparent, white);
+      }
+
+      &:before {
+        top: 0;
+        background: linear-gradient(white, transparent);
+      }
+
+      &:after,
+      &:before {
+        content: '';
+        z-index: 1000;
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 12px;
+      }
+    }
+
+    .select-option {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      min-height: 36px;
+      margin: 2px 0;
+      border-radius: 4px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: 0 12px;
+      font-size: $font-size-l;
+      color: $color-positive-light;
+
+      &:hover,
+      &:focus {
+        background-color: $color-selago;
+      }
+
+      &.selected {
+        color: black;
       }
     }
   }

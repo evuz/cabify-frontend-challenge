@@ -22,7 +22,11 @@ function BusinessCard({ userInfo }) {
             </p>
           </div>
           <div className="businessCard-cardFront-bottom">
-            <p className="businessCard-icon-phone">{userInfo.phonenumber}</p>
+            <p className="businessCard-icon-phone">
+              {[userInfo.prefix, userInfo.phonenumber]
+                .filter(Boolean)
+                .join(' ')}
+            </p>
             <p className="businessCard-icon-email">{userInfo.email}</p>
             <p className="businessCard-icon-website">{userInfo.website}</p>
             <p className="businessCard-icon-address">{userInfo.address}</p>
@@ -38,6 +42,7 @@ BusinessCard.propTypes = {
     fullname: PropTypes.string,
     jobdescription: PropTypes.string,
     phonenumber: PropTypes.string,
+    prefix: PropTypes.string,
     email: PropTypes.string,
     website: PropTypes.string,
     address: PropTypes.string,

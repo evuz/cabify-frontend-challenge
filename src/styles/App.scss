@@ -2,6 +2,7 @@
 @import "base/reset";
 
 @import "utils/vars";
+@import "utils/animations";
 
 @import "pages/common";
 
@@ -10,5 +11,7 @@
 @import "components/builder";
 @import "components/form";
 @import "components/button";
+@import "components/modal";
+@import "components/countryCodeOption";
 
 @import "modules/title";
