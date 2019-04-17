@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 function useInput(initialValue = '', validators = []) {
   const [value, setValue] = useState(initialValue);
-  const [errors, setErrors] = useState({ valid: true, error: {} });
+  const [validation, setValidation] = useState({ isValid: true, errors: {} });
 
   useEffect(() => {
     const validatorError = validators.reduce((acc, validator) => {
@@ -13,11 +13,11 @@ function useInput(initialValue = '', validators = []) {
       return acc;
     }, {});
     const errorChange =
-      JSON.stringify(validatorError) !== JSON.stringify(errors.error);
+      JSON.stringify(validatorError) !== JSON.stringify(validation.errors);
 
     if (errorChange) {
       const areError = !!Object.keys(validatorError).length;
-      setErrors({ valid: !areError, error: validatorError });
+      setValidation({ isValid: !areError, errors: validatorError });
     }
   }, [value]);
 
@@ -25,7 +25,7 @@ function useInput(initialValue = '', validators = []) {
     setValue(event.target.value);
   });
 
-  return [value, onChange, errors];
+  return { value, onChange, validation };
 }
 
 export default useInput;
