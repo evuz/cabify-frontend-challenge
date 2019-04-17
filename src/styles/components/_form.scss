@@ -15,6 +15,7 @@ input:-webkit-autofill {
 .formField {
   &-input,
   &-select {
+    position: relative;
     display: flex;
     border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
@@ -39,6 +40,12 @@ input:-webkit-autofill {
           transform: rotate(-180deg);
         }
       }
+    }
+
+    &.error {
+      animation: shake 1s;
+      color: $color-fb-negative;
+      border-color: $color-fb-negative;
     }
 
     &.disabled {
@@ -99,6 +106,14 @@ input:-webkit-autofill {
         background-size: contain;
         transition: transform $fastest ease-in;
       }
+    }
+
+    .error-message {
+      position: absolute;
+      height: $font-size-xxs * 2;
+      bottom: -$font-size-xxs * 2;
+      color: $color-fb-negative;
+      font-size: $font-size-xxs;
     }
   }
 

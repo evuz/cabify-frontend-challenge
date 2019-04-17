@@ -65,6 +65,17 @@ textarea {
   to {
     transform: scaleY(1); } }
 
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0); }
+  40%,
+  80% {
+    transform: translate3d(-10px, 0, 0); }
+  20%,
+  60% {
+    transform: translate3d(10px, 0, 0); } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -396,6 +407,7 @@ input:-webkit-autofill {
   width: 100%; }
 
 .formField-input, .formField-select {
+  position: relative;
   display: flex;
   border-bottom: solid 1px #A7A7B3;
   transition: all 0.3s ease; }
@@ -409,6 +421,10 @@ input:-webkit-autofill {
       color: #7350FF; }
     .formField-input.focus .select:after, .formField-select.focus .select:after {
       transform: rotate(-180deg); }
+  .formField-input.error, .formField-select.error {
+    animation: shake 1s;
+    color: #FC5959;
+    border-color: #FC5959; }
   .formField-input.disabled, .formField-select.disabled {
     border-bottom: dotted 1px #A7A7B3; }
     .formField-input.disabled .input input,
@@ -466,6 +482,12 @@ input:-webkit-autofill {
       background-repeat: no-repeat;
       background-size: contain;
       transition: transform 0.3s ease-in; }
+  .formField-input .error-message, .formField-select .error-message {
+    position: absolute;
+    height: 16px;
+    bottom: -16px;
+    color: #FC5959;
+    font-size: 8px; }
 
 .formField-select {
   cursor: pointer; }
