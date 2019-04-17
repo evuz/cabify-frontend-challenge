@@ -59,6 +59,12 @@ input[type=number] {
 textarea {
   vertical-align: top; }
 
+@keyframes scale-in {
+  from {
+    transform: scaleY(0); }
+  to {
+    transform: scaleY(1); } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -341,21 +347,22 @@ a {
       background: url("../images/cabify-logo-min.svg") center center no-repeat;
       background-size: contain; }
     .businessCard-cardFront-bottom {
-      padding-right: 24px; }
+      padding-right: 24px;
+      font-size: 11px; }
     .businessCard-cardFront-title {
       color: #4C58A7;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 24px; }
     .businessCard-cardFront-subtitle {
       color: #212240;
       line-height: 16px;
-      font-size: 11px; }
+      font-size: 13px; }
   .businessCard-icon-phone:before, .businessCard-icon-email:before, .businessCard-icon-website:before, .businessCard-icon-address:before {
     content: "";
     display: inline-block;
     margin-right: 8px;
-    width: 8px;
-    height: 8px;
+    width: 11px;
+    height: 11px;
     vertical-align: middle;
     margin-top: -2px; }
   .businessCard-icon-phone:before {
@@ -388,25 +395,35 @@ input:-webkit-autofill {
 .form {
   width: 100%; }
 
-.formField-input {
+.formField-input, .formField-select {
   display: flex;
   border-bottom: solid 1px #A7A7B3;
   transition: all 0.3s ease; }
-  .formField-input.active .input label {
+  .formField-input.active .input label,
+  .formField-input.active .select label, .formField-select.active .input label,
+  .formField-select.active .select label {
     top: 0; }
-  .formField-input.focus {
+  .formField-input.focus, .formField-select.focus {
     border-color: #7350FF; }
-    .formField-input.focus .input input {
+    .formField-input.focus .input input, .formField-select.focus .input input {
       color: #7350FF; }
-  .formField-input.disabled {
+    .formField-input.focus .select:after, .formField-select.focus .select:after {
+      transform: rotate(-180deg); }
+  .formField-input.disabled, .formField-select.disabled {
     border-bottom: dotted 1px #A7A7B3; }
-    .formField-input.disabled .input input {
+    .formField-input.disabled .input input,
+    .formField-input.disabled .select .select-value, .formField-select.disabled .input input,
+    .formField-select.disabled .select .select-value {
       color: #A7A7B3;
       cursor: not-allowed; }
-  .formField-input .input {
+  .formField-input .input,
+  .formField-input .select, .formField-select .input,
+  .formField-select .select {
     flex: 1 1 100%;
     position: relative; }
-    .formField-input .input label {
+    .formField-input .input label,
+    .formField-input .select label, .formField-select .input label,
+    .formField-select .select label {
       color: #717285;
       font-size: 11px;
       line-height: 16px;
@@ -416,12 +433,87 @@ input:-webkit-autofill {
       right: 0;
       left: 0;
       transition: all 0.3s ease; }
-    .formField-input .input input {
+    .formField-input .input input,
+    .formField-input .input .select-value,
+    .formField-input .select input,
+    .formField-input .select .select-value, .formField-select .input input,
+    .formField-select .input .select-value,
+    .formField-select .select input,
+    .formField-select .select .select-value {
       background-color: transparent;
       padding: 16px 0 8px;
       width: 100%;
       font-size: 12px;
       line-height: 16px; }
+    .formField-input .input .select-value,
+    .formField-input .select .select-value, .formField-select .input .select-value,
+    .formField-select .select .select-value {
+      min-height: 40px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  .formField-input .select, .formField-select .select {
+    max-width: 100%;
+    padding-right: 15px; }
+    .formField-input .select:after, .formField-select .select:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background: url("../images/arrow.svg") center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: transform 0.3s ease-in; }
+
+.formField-select {
+  cursor: pointer; }
+  .formField-select .select-options {
+    transform-origin: top;
+    animation: scale-in 0.3s;
+    overflow: hidden;
+    max-height: 180px;
+    max-width: 240px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 8px rgba(33, 34, 64, 0.16);
+    background-color: white; }
+    .formField-select .select-options .options-content {
+      position: relative;
+      width: calc(100% + 17px);
+      overflow: auto;
+      max-height: inherit;
+      padding: 5px 8px; }
+    .formField-select .select-options:after {
+      bottom: 0;
+      background: linear-gradient(transparent, white); }
+    .formField-select .select-options:before {
+      top: 0;
+      background: linear-gradient(white, transparent); }
+    .formField-select .select-options:after, .formField-select .select-options:before {
+      content: '';
+      z-index: 1000;
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 12px; }
+  .formField-select .select-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 36px;
+    margin: 2px 0;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #717285; }
+    .formField-select .select-option:hover, .formField-select .select-option:focus {
+      background-color: #F8FAFB; }
+    .formField-select .select-option.selected {
+      color: black; }
 
 .button-primary {
   box-shadow: 0 1px 4px 0 rgba(33, 34, 64, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 0.16); }
@@ -438,19 +530,56 @@ input:-webkit-autofill {
   line-height: 24px;
   cursor: pointer;
   transition: all 0.5s linear; }
-  .button.disabled {
-    opacity: 0.32;
-    pointer-events: none; }
+  .button:disabled {
+    opacity: 0.32; }
   .button-primary {
     background-color: #7350FF;
     color: #FFFFFF; }
-    .button-primary:active {
-      background-color: #6645FF; }
     .button-primary:hover {
       background-color: #7F5AFF; }
+    .button-primary:active {
+      background-color: #6645FF; }
   .button-full {
     display: block;
     width: 100%; }
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh; }
+    .modal-backdrop.show {
+      background-color: black;
+      opacity: 0.3; }
+  .modal-content {
+    position: absolute; }
+
+.country-code-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 200px; }
+  .country-code-option-left {
+    display: flex;
+    align-items: center; }
+  .country-code-option-flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 15px; }
 
 .title-main {
   font-size: 36px;

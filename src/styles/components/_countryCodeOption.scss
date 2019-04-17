@@ -1,0 +1,22 @@
+.country-code-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 200px;
+
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &-flag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px;
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+  }
+}

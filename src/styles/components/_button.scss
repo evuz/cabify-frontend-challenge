@@ -14,9 +14,8 @@
   line-height: $spacing*3;
   cursor: pointer;
   transition: all $faster linear;
-  &.disabled {
+  &:disabled {
     opacity: $alpha-32;
-    pointer-events: none;
   }
 
   &-primary {
@@ -25,12 +24,12 @@
 
     @extend %button-default-shadow;
 
-    &:active {
-      background-color: $color-main-dark;
-    }
-
     &:hover {
       background-color: $color-main-light;
+    }
+
+    &:active {
+      background-color: $color-main-dark;
     }
   }
 
