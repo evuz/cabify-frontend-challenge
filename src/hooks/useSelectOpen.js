@@ -15,7 +15,7 @@ function useSelectOpen(disabled) {
       }
       setOpen(value);
     } else {
-      setIgnoreNextBlur(false);
+      setIgnoreNextBlur(true);
       setOpen(true);
     }
   }
