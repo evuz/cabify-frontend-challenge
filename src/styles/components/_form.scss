@@ -28,13 +28,16 @@ input:-webkit-autofill {
       }
     }
 
-    &.focus {
+    &.focus,
+    &:focus {
       border-color: $color-focus;
 
       .input input {
         color: $color-main;
       }
+    }
 
+    &.open {
       .select {
         &:after {
           transform: rotate(-180deg);

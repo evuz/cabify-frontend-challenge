@@ -415,12 +415,12 @@ input:-webkit-autofill {
   .formField-input.active .select label, .formField-select.active .input label,
   .formField-select.active .select label {
     top: 0; }
-  .formField-input.focus, .formField-select.focus {
+  .formField-input.focus, .formField-input:focus, .formField-select.focus, .formField-select:focus {
     border-color: #7350FF; }
-    .formField-input.focus .input input, .formField-select.focus .input input {
+    .formField-input.focus .input input, .formField-input:focus .input input, .formField-select.focus .input input, .formField-select:focus .input input {
       color: #7350FF; }
-    .formField-input.focus .select:after, .formField-select.focus .select:after {
-      transform: rotate(-180deg); }
+  .formField-input.open .select:after, .formField-select.open .select:after {
+    transform: rotate(-180deg); }
   .formField-input.error, .formField-select.error {
     animation: shake 1s;
     color: #FC5959;

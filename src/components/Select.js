@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import filterClassnames from '../utils/filterClassnames';
 import Modal from './Modal';
 import Option from './Option';
+import useSelectOpen from '../hooks/useSelectOpen';
 
 function Options({ children, onChange, selected }) {
   const emptyOption = (
@@ -35,30 +36,46 @@ function Options({ children, onChange, selected }) {
 }
 
 function Select({ children, name, label, value, disabled, onChange }) {
+  const isDisabled = disabled || !children;
   const cmpRef = useRef(null);
   const [focus, setFocus] = useState(false);
-  disabled = disabled || !children;
+  const { open, handleBlur, handleFocus, handleKeyDown } = useSelectOpen(
+    isDisabled,
+  );
 
   const containerClass = {
-    focus,
-    disabled,
+    focus: focus || open,
+    open,
+    disabled: isDisabled,
     'formField-select': true,
     formField: true,
     active: value,
   };
+
+  const tabIndex = isDisabled ? null : 0;
   return (
-    <div ref={cmpRef} className={filterClassnames(containerClass)}>
+    <div
+      ref={cmpRef}
+      role="button"
+      className={filterClassnames(containerClass)}
+    >
       <div
-        onClick={() => disabled || setFocus(true)}
-        role="button"
         className="select"
+        tabIndex={tabIndex}
+        onBlur={ev => {
+          setFocus(false);
+          handleBlur(ev);
+        }}
+        onFocus={() => setFocus(true)}
+        onKeyDown={handleKeyDown}
+        onClick={handleFocus}
       >
         <div className="select-value">{value}</div>
         <input type="hidden" value={value} />
         <label htmlFor={name}>{label}</label>
       </div>
-      {focus ? (
-        <Modal className="formField-select" onClose={() => setFocus(false)}>
+      {open ? (
+        <Modal className="formField-select" onClose={handleBlur}>
           <div
             style={{
               position: 'absolute',
@@ -70,7 +87,8 @@ function Select({ children, name, label, value, disabled, onChange }) {
             <Options
               selected={value}
               onChange={(...args) => {
-                setFocus(false);
+                console.log('SELECT');
+                handleFocus(false);
                 onChange(...args);
               }}
             >
