@@ -323,12 +323,14 @@ a {
     position: relative;
     background-color: #4C58A7;
     width: 271px;
-    height: 171px;
-    margin-left: 8px;
-    transform: rotate(-9deg);
-    box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16); }
+    height: 171px; }
+    .businessCard-cardBack-container {
+      height: fit-content;
+      margin-left: 8px;
+      transform: rotate(-9deg);
+      box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16); }
     .businessCard-cardBack:before {
-      content: "";
+      content: '';
       position: absolute;
       background: url("../images/cabify-logo.svg") center center no-repeat;
       width: 77px;
@@ -343,13 +345,14 @@ a {
     background-color: #FFFFFF;
     width: 271px;
     height: 171px;
-    margin-left: -100%;
-    margin-top: 112px;
-    box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16);
-    z-index: 1;
     padding: 24px 32px; }
+    .businessCard-cardFront-container {
+      margin-left: -100%;
+      margin-top: 112px;
+      box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16);
+      z-index: 1; }
     .businessCard-cardFront:before {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 24px;
       right: 32px;
@@ -369,7 +372,7 @@ a {
       line-height: 16px;
       font-size: 13px; }
   .businessCard-icon-phone:before, .businessCard-icon-email:before, .businessCard-icon-website:before, .businessCard-icon-address:before {
-    content: "";
+    content: '';
     display: inline-block;
     margin-right: 8px;
     width: 11px;
@@ -388,6 +391,28 @@ a {
   .businessCard-icon-address:before {
     background: url("../images/address.svg") center center;
     background-size: contain; }
+
+.cardPreview {
+  margin: auto;
+  width: 271px;
+  height: 171px;
+  transform: scale(2);
+  perspective: 1000px; }
+  .cardPreview-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d; }
+  .cardPreview-back, .cardPreview-front {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%; }
+  .cardPreview-back {
+    transform: rotateY(180deg); }
+  .cardPreview:hover .cardPreview-inner {
+    transform: rotateY(180deg); }
 
 .builder {
   display: flex;
@@ -573,6 +598,8 @@ input:-webkit-autofill {
   left: 0;
   width: 100%;
   height: 100%; }
+  .modal.fixed {
+    position: fixed; }
   .modal-backdrop {
     position: absolute;
     top: 0;
@@ -585,6 +612,10 @@ input:-webkit-autofill {
       opacity: 0.3; }
   .modal-content {
     position: absolute; }
+    .modal-content.center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
 
 .country-code-option {
   display: flex;
