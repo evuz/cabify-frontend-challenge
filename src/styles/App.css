@@ -65,6 +65,17 @@ textarea {
   to {
     transform: scaleY(1); } }
 
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0); }
+  40%,
+  80% {
+    transform: translate3d(-10px, 0, 0); }
+  20%,
+  60% {
+    transform: translate3d(10px, 0, 0); } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -396,6 +407,7 @@ input:-webkit-autofill {
   width: 100%; }
 
 .formField-input, .formField-select {
+  position: relative;
   display: flex;
   border-bottom: solid 1px #A7A7B3;
   transition: all 0.3s ease; }
@@ -403,12 +415,16 @@ input:-webkit-autofill {
   .formField-input.active .select label, .formField-select.active .input label,
   .formField-select.active .select label {
     top: 0; }
-  .formField-input.focus, .formField-select.focus {
+  .formField-input.focus, .formField-input:focus, .formField-select.focus, .formField-select:focus {
     border-color: #7350FF; }
-    .formField-input.focus .input input, .formField-select.focus .input input {
+    .formField-input.focus .input input, .formField-input:focus .input input, .formField-select.focus .input input, .formField-select:focus .input input {
       color: #7350FF; }
-    .formField-input.focus .select:after, .formField-select.focus .select:after {
-      transform: rotate(-180deg); }
+  .formField-input.open .select:after, .formField-select.open .select:after {
+    transform: rotate(-180deg); }
+  .formField-input.error, .formField-select.error {
+    animation: shake 1s;
+    color: #FC5959;
+    border-color: #FC5959; }
   .formField-input.disabled, .formField-select.disabled {
     border-bottom: dotted 1px #A7A7B3; }
     .formField-input.disabled .input input,
@@ -466,6 +482,12 @@ input:-webkit-autofill {
       background-repeat: no-repeat;
       background-size: contain;
       transition: transform 0.3s ease-in; }
+  .formField-input .error-message, .formField-select .error-message {
+    position: absolute;
+    height: 16px;
+    bottom: -16px;
+    color: #FC5959;
+    font-size: 8px; }
 
 .formField-select {
   cursor: pointer; }
@@ -483,7 +505,8 @@ input:-webkit-autofill {
       width: calc(100% + 17px);
       overflow: auto;
       max-height: inherit;
-      padding: 5px 8px; }
+      padding: 5px 8px;
+      padding-right: 25px; }
     .formField-select .select-options:after {
       bottom: 0;
       background: linear-gradient(transparent, white); }
@@ -544,7 +567,7 @@ input:-webkit-autofill {
     width: 100%; }
 
 .modal {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   top: 0;
   left: 0;

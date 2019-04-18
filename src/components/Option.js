@@ -8,14 +8,15 @@ function Option({ children, onClick, value, selected }) {
     selected,
   };
   return (
-    <div
+    <li
       role="option"
+      tabIndex={selected ? 0 : -1}
       aria-selected={selected}
       className={filterClassnames(classnames)}
       onClick={() => onClick(value)}
     >
       {children}
-    </div>
+    </li>
   );
 }
 

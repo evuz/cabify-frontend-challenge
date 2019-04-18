@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import useInputTouch from '../hooks/useInputTouch';
 import filterClassnames from '../utils/filterClassnames';
 
-function Input({ name, label, placeholder, value, onChange, disabled, type }) {
+function Input({
+  name,
+  label,
+  placeholder,
+  value,
+  onChange,
+  disabled,
+  type,
+  validation,
+}) {
   const [focus, setFocus] = useState(false);
+  const isTouch = useInputTouch(value);
+  const showError = !focus && isTouch && !validation.isValid;
   const containerClass = {
     focus,
     disabled,
+    error: showError,
     'formField-input': true,
     active: !!value | focus,
   };
+  let error;
+  if (showError) {
+    const errorKey = Object.keys(validation.errors)[0];
+    error = validation.errors[errorKey];
+  }
 
   return (
     <div className={filterClassnames(containerClass)}>
@@ -27,6 +45,7 @@ function Input({ name, label, placeholder, value, onChange, disabled, type }) {
         />
         <label htmlFor={name}>{label}</label>
       </div>
+      {showError ? <span className="error-message">{error}</span> : null}
     </div>
   );
 }
@@ -37,6 +56,10 @@ Input.propTypes = {
   type: PropTypes.oneOf(['text', 'email', 'tel', 'password']),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
+  validation: PropTypes.shape({
+    isValid: PropTypes.bool,
+    errors: PropTypes.any,
+  }),
   onChange: PropTypes.func.isRequired,
 };
 
@@ -44,6 +67,7 @@ Input.defaultProps = {
   placeholder: null,
   disabled: false,
   type: 'text',
+  validation: { isValid: true, errors: {} },
 };
 
 export default Input;
