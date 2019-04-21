@@ -15,6 +15,7 @@ input:-webkit-autofill {
 .formField {
   &-input,
   &-select {
+    position: relative;
     display: flex;
     border-bottom: solid 1px $color-positive-lighter;
     transition: all $fastest ease;
@@ -27,18 +28,27 @@ input:-webkit-autofill {
       }
     }
 
-    &.focus {
+    &.focus,
+    &:focus {
       border-color: $color-focus;
 
       .input input {
         color: $color-main;
       }
+    }
 
+    &.open {
       .select {
         &:after {
           transform: rotate(-180deg);
         }
       }
+    }
+
+    &.error {
+      animation: shake 1s;
+      color: $color-fb-negative;
+      border-color: $color-fb-negative;
     }
 
     &.disabled {
@@ -100,6 +110,14 @@ input:-webkit-autofill {
         transition: transform $fastest ease-in;
       }
     }
+
+    .error-message {
+      position: absolute;
+      height: $font-size-xxs * 2;
+      bottom: -$font-size-xxs * 2;
+      color: $color-fb-negative;
+      font-size: $font-size-xxs;
+    }
   }
 
   &-select {
@@ -121,6 +139,7 @@ input:-webkit-autofill {
         overflow: auto;
         max-height: inherit;
         padding: 5px 8px;
+        padding-right: 25px;
       }
       &:after {
         bottom: 0;

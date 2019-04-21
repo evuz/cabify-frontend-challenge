@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import cabifyLogo from '../images/cabify-logo.svg';
+import CardBack from './CardBack';
+import CardFront from './CardFront';
 
 function BusinessCard({ userInfo }) {
   return (
@@ -13,24 +15,11 @@ function BusinessCard({ userInfo }) {
       </figure>
       <h1 className="title-main">Request your business card</h1>
       <div className="businessCard-cards">
-        <div className="businessCard-cardBack" />
-        <div className="businessCard-cardFront">
-          <div>
-            <p className="businessCard-cardFront-title">{userInfo.fullname}</p>
-            <p className="businessCard-cardFront-subtitle">
-              {userInfo.jobdescription}
-            </p>
-          </div>
-          <div className="businessCard-cardFront-bottom">
-            <p className="businessCard-icon-phone">
-              {[userInfo.prefix, userInfo.phonenumber]
-                .filter(Boolean)
-                .join(' ')}
-            </p>
-            <p className="businessCard-icon-email">{userInfo.email}</p>
-            <p className="businessCard-icon-website">{userInfo.website}</p>
-            <p className="businessCard-icon-address">{userInfo.address}</p>
-          </div>
+        <div className="businessCard-cardBack-container">
+          <CardBack />
+        </div>
+        <div className="businessCard-cardFront-container">
+          <CardFront userInfo={userInfo} />
         </div>
       </div>
     </div>

@@ -65,6 +65,17 @@ textarea {
   to {
     transform: scaleY(1); } }
 
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0); }
+  40%,
+  80% {
+    transform: translate3d(-10px, 0, 0); }
+  20%,
+  60% {
+    transform: translate3d(10px, 0, 0); } }
+
 body {
   background-color: #EEEEF0;
   color: #212240;
@@ -312,12 +323,14 @@ a {
     position: relative;
     background-color: #4C58A7;
     width: 271px;
-    height: 171px;
-    margin-left: 8px;
-    transform: rotate(-9deg);
-    box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16); }
+    height: 171px; }
+    .businessCard-cardBack-container {
+      height: fit-content;
+      margin-left: 8px;
+      transform: rotate(-9deg);
+      box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16); }
     .businessCard-cardBack:before {
-      content: "";
+      content: '';
       position: absolute;
       background: url("../images/cabify-logo.svg") center center no-repeat;
       width: 77px;
@@ -332,13 +345,14 @@ a {
     background-color: #FFFFFF;
     width: 271px;
     height: 171px;
-    margin-left: -100%;
-    margin-top: 112px;
-    box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16);
-    z-index: 1;
     padding: 24px 32px; }
+    .businessCard-cardFront-container {
+      margin-left: -100%;
+      margin-top: 112px;
+      box-shadow: -2px -2px 4px rgba(33, 34, 64, 0.16);
+      z-index: 1; }
     .businessCard-cardFront:before {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 24px;
       right: 32px;
@@ -358,7 +372,7 @@ a {
       line-height: 16px;
       font-size: 13px; }
   .businessCard-icon-phone:before, .businessCard-icon-email:before, .businessCard-icon-website:before, .businessCard-icon-address:before {
-    content: "";
+    content: '';
     display: inline-block;
     margin-right: 8px;
     width: 11px;
@@ -396,6 +410,7 @@ input:-webkit-autofill {
   width: 100%; }
 
 .formField-input, .formField-select {
+  position: relative;
   display: flex;
   border-bottom: solid 1px #A7A7B3;
   transition: all 0.3s ease; }
@@ -403,12 +418,16 @@ input:-webkit-autofill {
   .formField-input.active .select label, .formField-select.active .input label,
   .formField-select.active .select label {
     top: 0; }
-  .formField-input.focus, .formField-select.focus {
+  .formField-input.focus, .formField-input:focus, .formField-select.focus, .formField-select:focus {
     border-color: #7350FF; }
-    .formField-input.focus .input input, .formField-select.focus .input input {
+    .formField-input.focus .input input, .formField-input:focus .input input, .formField-select.focus .input input, .formField-select:focus .input input {
       color: #7350FF; }
-    .formField-input.focus .select:after, .formField-select.focus .select:after {
-      transform: rotate(-180deg); }
+  .formField-input.open .select:after, .formField-select.open .select:after {
+    transform: rotate(-180deg); }
+  .formField-input.error, .formField-select.error {
+    animation: shake 1s;
+    color: #FC5959;
+    border-color: #FC5959; }
   .formField-input.disabled, .formField-select.disabled {
     border-bottom: dotted 1px #A7A7B3; }
     .formField-input.disabled .input input,
@@ -466,6 +485,12 @@ input:-webkit-autofill {
       background-repeat: no-repeat;
       background-size: contain;
       transition: transform 0.3s ease-in; }
+  .formField-input .error-message, .formField-select .error-message {
+    position: absolute;
+    height: 16px;
+    bottom: -16px;
+    color: #FC5959;
+    font-size: 8px; }
 
 .formField-select {
   cursor: pointer; }
@@ -483,7 +508,8 @@ input:-webkit-autofill {
       width: calc(100% + 17px);
       overflow: auto;
       max-height: inherit;
-      padding: 5px 8px; }
+      padding: 5px 8px;
+      padding-right: 25px; }
     .formField-select .select-options:after {
       bottom: 0;
       background: linear-gradient(transparent, white); }
@@ -544,12 +570,14 @@ input:-webkit-autofill {
     width: 100%; }
 
 .modal {
-  position: fixed;
+  position: absolute;
   z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%; }
+  .modal.fixed {
+    position: fixed; }
   .modal-backdrop {
     position: absolute;
     top: 0;
@@ -562,6 +590,10 @@ input:-webkit-autofill {
       opacity: 0.3; }
   .modal-content {
     position: absolute; }
+    .modal-content.center {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
 
 .country-code-option {
   display: flex;
@@ -580,6 +612,50 @@ input:-webkit-autofill {
     width: 15px;
     height: 15px;
     margin-right: 15px; }
+
+.cardPreview-card {
+  margin: auto;
+  width: 271px;
+  height: 171px;
+  transform: scale(2);
+  perspective: 1000px; }
+
+.cardPreview-container {
+  display: flex;
+  width: 542px;
+  height: 342px; }
+
+.cardPreview-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; }
+
+.cardPreview-back, .cardPreview-front {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.cardPreview-back {
+  transform: rotateY(180deg); }
+
+.cardPreview-card:hover .cardPreview-inner {
+  transform: rotateY(180deg); }
+
+.cardPreview-info {
+  background-color: #4C58A7;
+  color: #FFFFFF;
+  max-width: 542px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px; }
+
+.cardPreview-button {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center; }
 
 .title-main {
   font-size: 36px;
