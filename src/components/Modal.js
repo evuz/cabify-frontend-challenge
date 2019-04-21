@@ -11,10 +11,23 @@ function Backdrop({ onClick, show }) {
   return <div className={filterClassnames(classnames)} onClick={onClick} />;
 }
 
-function Modal({ onClose, showBackdrop, children, className, parentRef }) {
+function Modal({
+  onClose,
+  showBackdrop,
+  children,
+  className,
+  center,
+  fixed,
+  parentRef,
+}) {
   const classnames = {
     modal: true,
+    fixed,
     [className]: !!className,
+  };
+  const contentClassnames = {
+    center,
+    'modal-content': true,
   };
 
   useEffect(() => {
@@ -44,7 +57,7 @@ function Modal({ onClose, showBackdrop, children, className, parentRef }) {
   return ReactDOM.createPortal(
     <div onKeyDown={handleKeyDown} className={filterClassnames(classnames)}>
       <Backdrop onClick={onClose} show={showBackdrop} />
-      <div className="modal-content">{children}</div>
+      <div className={filterClassnames(contentClassnames)}>{children}</div>
     </div>,
     document.body,
   );
@@ -56,12 +69,16 @@ Modal.propTypes = {
   className: PropTypes.string,
   showBackdrop: PropTypes.bool,
   parentRef: PropTypes.object,
+  fixed: PropTypes.bool,
+  center: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   showBackdrop: false,
   className: null,
   parentRef: null,
+  fixed: false,
+  center: false,
 };
 
 export default Modal;

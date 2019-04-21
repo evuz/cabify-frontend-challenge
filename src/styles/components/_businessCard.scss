@@ -1,19 +1,22 @@
+$card-width: 271px;
+$card-height: 171px;
+
 .businessCard {
-  background: url("../images/background.png") center center;
+  background: url('../images/background.png') center center;
   position: relative;
   font-family: $secondaryfont;
   font-size: $font-size-xxs;
   line-height: 14px;
   color: $color-positive-light;
-  padding: $spacing*14 $spacing*5 $spacing*18;
+  padding: $spacing * 14 $spacing * 5 $spacing * 18;
   box-shadow: 4px 0px 8px $color-shadow-dark;
 
   &-badge {
     position: absolute;
     top: 0;
-    right: $spacing*2;
-    width: $spacing*10;
-    height: $spacing*8;
+    right: $spacing * 2;
+    width: $spacing * 10;
+    height: $spacing * 8;
     background-color: $color-main;
 
     &-logo {
@@ -32,21 +35,24 @@
   &-cards {
     display: flex;
     justify-content: space-between;
-    margin-top: $spacing*11;
+    margin-top: $spacing * 11;
   }
 
   &-cardBack {
     position: relative;
     background-color: $color-print-main;
-    width: 271px;
-    height: 171px;
-    margin-left: $spacing;
-    transform: rotate(-9deg);
-    box-shadow: -2px -2px 4px $color-shadow-light;
+    width: $card-width;
+    height: $card-height;
+    &-container {
+      height: fit-content;
+      margin-left: $spacing;
+      transform: rotate(-9deg);
+      box-shadow: -2px -2px 4px $color-shadow-light;
+    }
     &:before {
-      content: "";
+      content: '';
       position: absolute;
-      background: url("../images/cabify-logo.svg") center center no-repeat;
+      background: url('../images/cabify-logo.svg') center center no-repeat;
       width: 77px;
       height: 26px;
       top: calc(50% - 13px);
@@ -60,26 +66,29 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: $color-white;
-    width: 271px;
-    height: 171px;
-    margin-left: -100%;
-    margin-top: $spacing*14;
-    box-shadow: -2px -2px 4px $color-shadow-light;
-    z-index: 1;
-    padding: $spacing*3 $spacing*4;
+    width: $card-width;
+    height: $card-height;
+    padding: $spacing * 3 $spacing * 4;
+    &-container {
+      margin-left: -100%;
+      margin-top: $spacing * 14;
+      box-shadow: -2px -2px 4px $color-shadow-light;
+      z-index: 1;
+    }
+
     &:before {
-      content: "";
+      content: '';
       position: absolute;
-      bottom: $spacing*3;
-      right: $spacing*4;
+      bottom: $spacing * 3;
+      right: $spacing * 4;
       height: 15px;
       width: 12px;
-      background: url("../images/cabify-logo-min.svg") center center no-repeat;
+      background: url('../images/cabify-logo-min.svg') center center no-repeat;
       background-size: contain;
     }
 
     &-bottom {
-      padding-right: $spacing*3;
+      padding-right: $spacing * 3;
       font-size: $font-size-xs;
     }
 
@@ -97,9 +106,12 @@
   }
 
   &-icon {
-    &-phone, &-email, &-website, &-address {
+    &-phone,
+    &-email,
+    &-website,
+    &-address {
       &:before {
-        content: "";
+        content: '';
         display: inline-block;
         margin-right: $spacing;
         width: $font-size-xs;
@@ -110,19 +122,19 @@
     }
 
     &-phone:before {
-      background: url("../images/phone.svg") center center;
+      background: url('../images/phone.svg') center center;
       background-size: contain;
     }
     &-email:before {
-      background: url("../images/email.svg") center center;
+      background: url('../images/email.svg') center center;
       background-size: contain;
     }
     &-website:before {
-      background: url("../images/website.svg") center center;
+      background: url('../images/website.svg') center center;
       background-size: contain;
     }
     &-address:before {
-      background: url("../images/address.svg") center center;
+      background: url('../images/address.svg') center center;
       background-size: contain;
     }
   }
