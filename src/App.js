@@ -17,19 +17,16 @@ import CountryCodeOption from './components/CountryCodeOption';
 import submitBusinessCard from './api/submit';
 
 function App() {
-  const fullname = useInput('Jesús', [validators.required]);
-  const jobdescription = useInput('Front-End', [validators.required]);
-  const phonenumber = useInput('685 994 136', [
+  const fullname = useInput('', [validators.required]);
+  const jobdescription = useInput('', [validators.required]);
+  const phonenumber = useInput('', [
     validators.required,
     validators.phoneNumber,
   ]);
-  const email = useInput('jesus@mail.com', [
-    validators.required,
-    validators.email,
-  ]);
-  const website = useInput('www.foo.dev', [validators.required]);
-  const address = useInput('Avenida Grecia', [validators.required]);
-  const [prefix, setPrefix] = useState('+34');
+  const email = useInput('', [validators.required, validators.email]);
+  const website = useInput('', [validators.required]);
+  const address = useInput('', [validators.required]);
+  const [prefix, setPrefix] = useState('');
   const [submitModal, setSubmitModal] = useState(false);
 
   const validForm = ![
