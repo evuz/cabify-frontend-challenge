@@ -14,6 +14,7 @@ import validators from './utils/validators';
 
 import './styles/App.css';
 import CountryCodeOption from './components/CountryCodeOption';
+import submitBusinessCard from './api/submit';
 
 function App() {
   const fullname = useInput('Jesús', [validators.required]);
@@ -43,7 +44,9 @@ function App() {
   function submit(ev) {
     ev.preventDefault();
     setSubmitModal(true);
-    console.log('Submit');
+    submitBusinessCard(userInfo).catch(err => {
+      console.error(err);
+    });
   }
 
   const userInfo = {
