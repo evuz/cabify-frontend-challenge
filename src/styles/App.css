@@ -392,28 +392,6 @@ a {
     background: url("../images/address.svg") center center;
     background-size: contain; }
 
-.cardPreview {
-  margin: auto;
-  width: 271px;
-  height: 171px;
-  transform: scale(2);
-  perspective: 1000px; }
-  .cardPreview-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s;
-    transform-style: preserve-3d; }
-  .cardPreview-back, .cardPreview-front {
-    backface-visibility: hidden;
-    position: absolute;
-    width: 100%;
-    height: 100%; }
-  .cardPreview-back {
-    transform: rotateY(180deg); }
-  .cardPreview:hover .cardPreview-inner {
-    transform: rotateY(180deg); }
-
 .builder {
   display: flex;
   align-items: center;
@@ -634,6 +612,50 @@ input:-webkit-autofill {
     width: 15px;
     height: 15px;
     margin-right: 15px; }
+
+.cardPreview-card {
+  margin: auto;
+  width: 271px;
+  height: 171px;
+  transform: scale(2);
+  perspective: 1000px; }
+
+.cardPreview-container {
+  display: flex;
+  width: 542px;
+  height: 342px; }
+
+.cardPreview-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; }
+
+.cardPreview-back, .cardPreview-front {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.cardPreview-back {
+  transform: rotateY(180deg); }
+
+.cardPreview-card:hover .cardPreview-inner {
+  transform: rotateY(180deg); }
+
+.cardPreview-info {
+  background-color: #4C58A7;
+  color: #FFFFFF;
+  max-width: 542px;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px; }
+
+.cardPreview-button {
+  margin: 8px 0;
+  display: flex;
+  justify-content: center; }
 
 .title-main {
   font-size: 36px;
